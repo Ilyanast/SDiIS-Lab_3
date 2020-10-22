@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Исходные файлы\Station">
+      <UniqueIdentifier>{af88efaa-b096-4b02-89d6-ee4eb3f6166c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Station">
+      <UniqueIdentifier>{85bc9b23-c66d-4109-8781-d3f1c75577f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Train">
+      <UniqueIdentifier>{944fb29d-f54e-4f98-a7cc-7dd0e40a3e6c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Train">
+      <UniqueIdentifier>{c36adc9f-c036-428a-8f37-5f3634884379}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Train\Locomative">
+      <UniqueIdentifier>{351f4abe-5b2f-4e66-a7b9-7b306a379aee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Train\Van">
+      <UniqueIdentifier>{c57948ba-ee70-4a8f-8d90-5a3882fcc059}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Train\Locomative">
+      <UniqueIdentifier>{506012ea-a229-41c7-a557-5389a997e025}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Train\Van">
+      <UniqueIdentifier>{093b7f87-1d85-418c-b216-824b35634545}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Lab_3.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Van.cpp">
+      <Filter>Исходные файлы\Train\Van</Filter>
+    </ClCompile>
+    <ClCompile Include="Passenger_van.cpp">
+      <Filter>Исходные файлы\Train\Van</Filter>
+    </ClCompile>
+    <ClCompile Include="Freight_van.cpp">
+      <Filter>Исходные файлы\Train\Van</Filter>
+    </ClCompile>
+    <ClCompile Include="Locomative.cpp">
+      <Filter>Исходные файлы\Train\Locomative</Filter>
+    </ClCompile>
+    <ClCompile Include="Train.cpp">
+      <Filter>Исходные файлы\Train</Filter>
+    </ClCompile>
+    <ClCompile Include="Station.cpp">
+      <Filter>Исходные файлы\Station</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Freight_van.h">
+      <Filter>Файлы заголовков\Train\Van</Filter>
+    </ClInclude>
+    <ClInclude Include="Passenger_van.h">
+      <Filter>Файлы заголовков\Train\Van</Filter>
+    </ClInclude>
+    <ClInclude Include="Van.h">
+      <Filter>Файлы заголовков\Train\Van</Filter>
+    </ClInclude>
+    <ClInclude Include="Locomative.h">
+      <Filter>Файлы заголовков\Train\Locomative</Filter>
+    </ClInclude>
+    <ClInclude Include="Train.h">
+      <Filter>Файлы заголовков\Train</Filter>
+    </ClInclude>
+    <ClInclude Include="Station.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="input_data.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+  </ItemGroup>
+</Project>
