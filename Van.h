@@ -13,7 +13,8 @@ protected:
 
 public:
 	Van(int van_number, int van_empty_weight, Van_type van_type);
-	friend bool operator<(const Van& first_van, const Van& second_van);
+	friend bool comparator(const Van& first_van, const Van& second_van);
 	virtual int weight_of_van() = 0;
 	int get_van_number();
+	Van_type get_van_type();
 };

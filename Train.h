@@ -19,6 +19,7 @@ class Train
 	vector <Van*> van_vector;
 
 	int speed_loss(int weight);
+	bool is_passenger_van(const Van* first_van, const Van* second_van);
 	void update_train_weight_of_vans(int van_weight);
 	void update_train_pulling_force(int locomative_pulling_force);
 	void update_train_speed();

@@ -6,6 +6,12 @@ int Train::speed_loss(int weight)
 	return int((double(weight) / train_pulling_force) * train_empty_max_speed);
 }
 
+bool Train::is_passenger_van(const Van* first_van, const Van* second_van)
+{
+	return false;
+}
+
+
 void Train::update_train_weight_of_vans(int van_weight)
 {
 	train_weight_of_vans += van_weight;
@@ -25,8 +31,22 @@ void Train::update_train_speed()
 
 void Train::sort_van_vector()
 {
-	std::sort(van_vector.begin(), van_vector.end());
+	if(van_vector.size() > 2)
+		if (van_vector[van_vector.size() - 1]->get_van_type() == Van_type::PASSENGER) {
+			for (int i = 0; i < van_vector.size(); i++) {
+				if (van_vector[i]->get_van_type() != Van_type::PASSENGER) {
+					std::swap(van_vector[van_vector.size() - 1], van_vector[i]);
+					break;
+				}
+			}
+		}
+
+	if (van_vector.size() == 2) {
+		if (van_vector[0]->get_van_type() != Van_type::PASSENGER & van_vector[1]->get_van_type() == Van_type::PASSENGER)
+			std::swap(van_vector[0], van_vector[1]);
+	}
 }
+
 
 void Train::add_locomative(int locomative_number, int locomative_max_speed, int locomative_pulling_force)
 {
@@ -84,6 +104,7 @@ Train::Train(int locomative_number, int locomative_max_speed, int locomative_pul
 
 	train_empty_max_speed = locomative_max_speed;
 	train_pulling_force = locomative_pulling_force;
+	train_speed_with_cargo = 0;
 	train_weight_of_vans = 0;
 }
 
@@ -95,4 +116,9 @@ Train::~Train()
 	for (int i = 0; i < van_vector.size(); i++) {
 		delete van_vector[i];
 	}
+}
+
+inline bool is_passenger_van(const Van* first_van, const Van* second_van)
+{
+
 }

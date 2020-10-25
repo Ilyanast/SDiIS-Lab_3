@@ -9,6 +9,8 @@ int main()
 	train->add_passenger_van(1005, 2000, 40, 100);
 	train->add_passenger_van(1006, 2000, 40, 120);
 	train->add_freight_van(1007, 2000, 2000, 10000);
+	train->add_passenger_van(1008, 2000, 45, 120);
+	train->add_passenger_van(1009, 2000, 45, 120);
 	train->add_locomative(1004, 100, 60000);
 	getchar();
 }
