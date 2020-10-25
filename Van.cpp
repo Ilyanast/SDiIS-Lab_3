@@ -16,8 +16,3 @@ Van_type Van::get_van_type()
 {
 	return van_type;
 }
-
-bool comparator(const Van& first_van, const Van& second_van)
-{
-	return first_van.van_type == Van_type::PASSENGER;
-}
