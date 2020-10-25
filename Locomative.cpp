@@ -1,8 +1,13 @@
 #include "Locomative.h"
 
-Locomative::Locomative(int locomative_max_speed, int locomative_pulling_force, int locomative_year_of_service)
+int Locomative::get_locomative_number()
 {
+	return locomative_number;
+}
+
+Locomative::Locomative(int locomative_number, int locomative_max_speed, int locomative_pulling_force)
+{
+	this->locomative_number = locomative_number;
 	this->locomative_max_speed = locomative_max_speed;
 	this->locomative_pulling_force = locomative_pulling_force;
-	this->locomative_year_of_service = locomative_year_of_service;
 }

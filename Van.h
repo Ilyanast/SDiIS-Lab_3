@@ -1,21 +1,19 @@
 #pragma once
 
 #include <string>
-
-enum Van_type
-{
-	FREIGHT = 0,
-	PASSENGER
-};
+#include "Van_type.h"
 
 class Van
 {
+
 protected:
-	
+	int van_number;
 	int van_empty_weight;
 	Van_type van_type;
 
 public:
-	Van(int van_empty_weight, Van_type van_type);
+	Van(int van_number, int van_empty_weight, Van_type van_type);
+	friend bool operator<(const Van& first_van, const Van& second_van);
 	virtual int weight_of_van() = 0;
+	int get_van_number();
 };

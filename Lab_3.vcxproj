@@ -166,6 +166,7 @@
     <ClInclude Include="Station.h" />
     <ClInclude Include="Train.h" />
     <ClInclude Include="Van.h" />
+    <ClInclude Include="Van_type.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="input_data.txt" />

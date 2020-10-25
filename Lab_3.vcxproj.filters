@@ -78,7 +78,10 @@
       <Filter>Файлы заголовков\Train</Filter>
     </ClInclude>
     <ClInclude Include="Station.h">
-      <Filter>Файлы заголовков</Filter>
+      <Filter>Файлы заголовков\Station</Filter>
+    </ClInclude>
+    <ClInclude Include="Van_type.h">
+      <Filter>Файлы заголовков\Train\Van</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
