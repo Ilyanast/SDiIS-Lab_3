@@ -37,6 +37,12 @@
     <Filter Include="Файлы заголовков\Train\Van">
       <UniqueIdentifier>{093b7f87-1d85-418c-b216-824b35634545}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\Railway_model">
+      <UniqueIdentifier>{3b0e900f-af82-498e-bf2d-dc597ab640f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Railway_model">
+      <UniqueIdentifier>{7f594f83-70a5-4ec1-83cb-395b55ca9ec5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lab_3.cpp">
@@ -58,6 +64,15 @@
       <Filter>Исходные файлы\Train</Filter>
     </ClCompile>
     <ClCompile Include="Station.cpp">
+      <Filter>Исходные файлы\Station</Filter>
+    </ClCompile>
+    <ClCompile Include="Passenger_station.cpp">
+      <Filter>Исходные файлы\Station</Filter>
+    </ClCompile>
+    <ClCompile Include="Passanger_freight_station.cpp">
+      <Filter>Исходные файлы\Station</Filter>
+    </ClCompile>
+    <ClCompile Include="Freight_station.cpp">
       <Filter>Исходные файлы\Station</Filter>
     </ClCompile>
   </ItemGroup>
@@ -82,6 +97,24 @@
     </ClInclude>
     <ClInclude Include="Van_type.h">
       <Filter>Файлы заголовков\Train\Van</Filter>
+    </ClInclude>
+    <ClInclude Include="Station_type.h">
+      <Filter>Файлы заголовков\Station</Filter>
+    </ClInclude>
+    <ClInclude Include="Passenger_station.h">
+      <Filter>Файлы заголовков\Station</Filter>
+    </ClInclude>
+    <ClInclude Include="Freight_station.h">
+      <Filter>Файлы заголовков\Station</Filter>
+    </ClInclude>
+    <ClInclude Include="Passanger_freight_station.h">
+      <Filter>Файлы заголовков\Station</Filter>
+    </ClInclude>
+    <ClInclude Include="Railway_model.h">
+      <Filter>Файлы заголовков\Railway_model</Filter>
+    </ClInclude>
+    <ClInclude Include="Station_position.h">
+      <Filter>Файлы заголовков\Railway_model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -151,19 +151,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Freight_station.cpp" />
     <ClCompile Include="Freight_van.cpp" />
     <ClCompile Include="Lab_3.cpp" />
     <ClCompile Include="Locomative.cpp" />
+    <ClCompile Include="Passanger_freight_station.cpp" />
+    <ClCompile Include="Passenger_station.cpp" />
     <ClCompile Include="Passenger_van.cpp" />
     <ClCompile Include="Station.cpp" />
     <ClCompile Include="Train.cpp" />
     <ClCompile Include="Van.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Freight_station.h" />
     <ClInclude Include="Freight_van.h" />
+    <ClInclude Include="Railway_model.h" />
     <ClInclude Include="Locomative.h" />
+    <ClInclude Include="Passanger_freight_station.h" />
+    <ClInclude Include="Passenger_station.h" />
     <ClInclude Include="Passenger_van.h" />
     <ClInclude Include="Station.h" />
+    <ClInclude Include="Station_position.h" />
+    <ClInclude Include="Station_type.h" />
     <ClInclude Include="Train.h" />
     <ClInclude Include="Van.h" />
     <ClInclude Include="Van_type.h" />

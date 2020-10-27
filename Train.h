@@ -12,6 +12,7 @@ class Train
 {
 	int train_speed_with_cargo;
 	int train_empty_max_speed;
+
 	int train_pulling_force;
 	int train_weight_of_vans;
 

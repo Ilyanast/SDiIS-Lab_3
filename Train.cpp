@@ -46,6 +46,20 @@ void Train::add_locomative(int locomative_number, int locomative_max_speed, int 
 	update_train_pulling_force(locomative_pulling_force);
 }
 
+void Train::add_freight_van(int van_number, int van_empty_weight, int current_cargo_weight, int max_cargo_weight)
+{
+	Freight_van* freight_van = new Freight_van(van_number, van_empty_weight, current_cargo_weight, max_cargo_weight);
+	van_vector.push_back(freight_van);
+	update_train_weight(freight_van->weight_of_van());
+}
+
+void Train::add_passenger_van(int van_number, int van_empty_weight, int current_amount_of_passengers, int max_amount_of_passengers)
+{
+	Passenger_van* passenger_van = new Passenger_van(van_number, van_empty_weight, current_amount_of_passengers, max_amount_of_passengers);
+	van_vector.insert(van_vector.begin(), passenger_van);
+	update_train_weight(passenger_van->weight_of_van());
+}
+
 void Train::remove_locomative(int locomative_number)
 {
 	if (locomative_vector.size() == 1)
@@ -64,20 +78,6 @@ void Train::remove_locomative(int locomative_number)
 	update_train_empty_max_speed();
 	update_train_pulling_force(-(locomative->get_locomative_pulling_force()));
 	delete locomative;
-}
-
-void Train::add_freight_van(int van_number, int van_empty_weight, int current_cargo_weight, int max_cargo_weight)
-{
-	Freight_van* freight_van = new Freight_van(van_number, van_empty_weight, current_cargo_weight, max_cargo_weight);
-	van_vector.push_back(freight_van);
-	update_train_weight(freight_van->weight_of_van());
-}
-
-void Train::add_passenger_van(int van_number, int van_empty_weight, int current_amount_of_passengers, int max_amount_of_passengers)
-{
-	Passenger_van* passenger_van = new Passenger_van(van_number, van_empty_weight, current_amount_of_passengers, max_amount_of_passengers);
-	van_vector.insert(van_vector.begin(), passenger_van);
-	update_train_weight(passenger_van->weight_of_van());
 }
 
 void Train::remove_van(int van_number)
