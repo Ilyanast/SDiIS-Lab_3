@@ -172,11 +172,15 @@
     <ClCompile Include="Passanger_freight_station.cpp" />
     <ClCompile Include="Passenger_station.cpp" />
     <ClCompile Include="Passenger_van.cpp" />
+    <ClCompile Include="Railway_model.cpp" />
+    <ClCompile Include="Route_params.cpp" />
     <ClCompile Include="Station.cpp" />
+    <ClCompile Include="Station_info.cpp" />
     <ClCompile Include="Train.cpp" />
     <ClCompile Include="Van.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Action_type.h" />
     <ClInclude Include="Freight_station.h" />
     <ClInclude Include="Freight_van.h" />
     <ClInclude Include="Railway_model.h" />
@@ -184,15 +188,19 @@
     <ClInclude Include="Passanger_freight_station.h" />
     <ClInclude Include="Passenger_station.h" />
     <ClInclude Include="Passenger_van.h" />
+    <ClInclude Include="Route_params.h" />
     <ClInclude Include="Station.h" />
-    <ClInclude Include="Station_position.h" />
+    <ClInclude Include="Station_info.h" />
     <ClInclude Include="Station_type.h" />
     <ClInclude Include="Train.h" />
     <ClInclude Include="Van.h" />
     <ClInclude Include="Van_type.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="input_data.txt" />
+    <Text Include="railway_model_stations.txt" />
+    <Text Include="train_1_route.txt" />
+    <Text Include="train_2_route.txt" />
+    <Text Include="train_3_route.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -43,6 +43,21 @@
     <Filter Include="Файлы заголовков\Railway_model">
       <UniqueIdentifier>{7f594f83-70a5-4ec1-83cb-395b55ca9ec5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\Train\Route">
+      <UniqueIdentifier>{e36cfb78-9ab0-4dff-a4e5-b002fdbc29ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Train\Route">
+      <UniqueIdentifier>{aa7c5f18-d52b-417a-a4b9-cd84008a2494}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Station\Station_params">
+      <UniqueIdentifier>{338b5687-fd2e-4037-b01f-a6c619fc3284}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Station\Station_params">
+      <UniqueIdentifier>{d1b23d16-9988-490c-9b7e-86ff417fe4e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы ресурсов\Train_route">
+      <UniqueIdentifier>{95612b8f-d893-4fd0-ba56-4e7d8212fd18}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lab_3.cpp">
@@ -74,6 +89,15 @@
     </ClCompile>
     <ClCompile Include="Freight_station.cpp">
       <Filter>Исходные файлы\Station</Filter>
+    </ClCompile>
+    <ClCompile Include="Route_params.cpp">
+      <Filter>Исходные файлы\Train\Route</Filter>
+    </ClCompile>
+    <ClCompile Include="Railway_model.cpp">
+      <Filter>Исходные файлы\Railway_model</Filter>
+    </ClCompile>
+    <ClCompile Include="Station_info.cpp">
+      <Filter>Исходные файлы\Station\Station_params</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -113,12 +137,27 @@
     <ClInclude Include="Railway_model.h">
       <Filter>Файлы заголовков\Railway_model</Filter>
     </ClInclude>
-    <ClInclude Include="Station_position.h">
-      <Filter>Файлы заголовков\Railway_model</Filter>
+    <ClInclude Include="Action_type.h">
+      <Filter>Файлы заголовков\Train</Filter>
+    </ClInclude>
+    <ClInclude Include="Route_params.h">
+      <Filter>Файлы заголовков\Train\Route</Filter>
+    </ClInclude>
+    <ClInclude Include="Station_info.h">
+      <Filter>Файлы заголовков\Station\Station_params</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="input_data.txt">
+    <Text Include="train_1_route.txt">
+      <Filter>Файлы ресурсов\Train_route</Filter>
+    </Text>
+    <Text Include="train_2_route.txt">
+      <Filter>Файлы ресурсов\Train_route</Filter>
+    </Text>
+    <Text Include="train_3_route.txt">
+      <Filter>Файлы ресурсов\Train_route</Filter>
+    </Text>
+    <Text Include="railway_model_stations.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
   </ItemGroup>

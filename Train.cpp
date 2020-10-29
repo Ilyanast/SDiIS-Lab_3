@@ -1,7 +1,6 @@
 #include "Train.h"
-#include <algorithm>
 
-int Train::speed_loss(int weight)
+int Train::get_speed_loss(int weight)
 {
 	return int((double(weight) / train_pulling_force) * train_empty_max_speed);
 }
@@ -34,9 +33,33 @@ void Train::update_train_empty_max_speed()
 
 void Train::update_train_speed()
 {
-	train_speed_with_cargo = train_empty_max_speed - speed_loss(train_weight_of_vans);
+	train_speed_with_cargo = train_empty_max_speed - get_speed_loss(train_weight_of_vans);
 }
 
+
+void Train::load_route(string filename)
+{
+	string line;
+	stringstream line_stream;
+
+	int station_number = 0;
+	int action_type = 0;
+
+	ifstream in(filename);
+
+	if (in.is_open())
+	{
+		while (getline(in, line))
+		{
+			line_stream.str(line);
+			line_stream >> station_number >> action_type;
+			Route_params* route_params = new Route_params(station_number, Action_type(action_type));
+			train_route.push_back(route_params);
+			line_stream.clear();
+		}
+	}
+	in.close();
+}
 
 void Train::add_locomative(int locomative_number, int locomative_max_speed, int locomative_pulling_force)
 {
