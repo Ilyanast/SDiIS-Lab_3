@@ -107,9 +107,6 @@
     <ClInclude Include="Passenger_van.h">
       <Filter>Файлы заголовков\Train\Van</Filter>
     </ClInclude>
-    <ClInclude Include="Van.h">
-      <Filter>Файлы заголовков\Train\Van</Filter>
-    </ClInclude>
     <ClInclude Include="Locomative.h">
       <Filter>Файлы заголовков\Train\Locomative</Filter>
     </ClInclude>
@@ -146,6 +143,9 @@
     <ClInclude Include="Station_info.h">
       <Filter>Файлы заголовков\Station\Station_params</Filter>
     </ClInclude>
+    <ClInclude Include="Van.h">
+      <Filter>Файлы заголовков\Train</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="train_1_route.txt">
@@ -158,6 +158,9 @@
       <Filter>Файлы ресурсов\Train_route</Filter>
     </Text>
     <Text Include="railway_model_stations.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="railway_model_connections.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
   </ItemGroup>

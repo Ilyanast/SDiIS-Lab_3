@@ -28,10 +28,11 @@ int main()
  //       window.display();
  //   }
 
-    Railway_model Railway_model;
-    Railway_model.load_railway_model("railway_model_stations.txt");
+    Railway_model railway_model;
+    railway_model.load_railway_model_stations("railway_model_stations.txt");
+	railway_model.load_railway_model_connections("railway_model_connections.txt");
 
-    //Train* train = new Train(1001, 90, 20000);
-    //train->load_route("train_route_1.txt");
+    Train* train = new Train(1001, 90, 20000);
+    train->load_route("train_route_1.txt");
     getchar();
 }

@@ -1,6 +1,62 @@
 #include "Railway_model.h"
 
-void Railway_model::load_railway_model(string filename)
+void Railway_model::load_railway_model_connections(string filename)
+{
+	string line;
+	stringstream line_stream;
+
+	int basic_station_num = 0;
+	int connected_station_num = 0;
+	int distance = 0;
+
+	Station_and_distance station_and_distance;
+
+	ifstream in(filename);
+
+	if (in.is_open())
+	{
+		while (getline(in, line))
+		{
+			line_stream.str(line);
+			line_stream >> basic_station_num >> connected_station_num >> distance;
+
+			for (int i = 0; i < railway_model.size(); i++) {
+				if (railway_model[i].station_info->get_station_number() == connected_station_num) {
+					station_and_distance.station_info = railway_model[i].station_info;
+					station_and_distance.distance = distance;
+
+					for (int j = 0; j < railway_model.size(); j++) {
+						if (railway_model[j].station_info->get_station_number() == basic_station_num) {
+							railway_model[j].connected_stations.push_back(station_and_distance);
+							break;
+						}
+					}
+					break;
+				}
+			}
+
+			for (int i = 0; i < railway_model.size(); i++) {
+				if (railway_model[i].station_info->get_station_number() == basic_station_num) {
+					station_and_distance.station_info = railway_model[i].station_info;
+					station_and_distance.distance = distance;
+
+					for (int j = 0; j < railway_model.size(); j++) {
+						if (railway_model[j].station_info->get_station_number() == connected_station_num) {
+							railway_model[j].connected_stations.push_back(station_and_distance);
+							break;
+						}
+					}
+					break;
+				}
+			}
+
+			line_stream.clear();
+		}
+	}
+	in.close();
+}
+
+void Railway_model::load_railway_model_stations(string filename)
 {
 	string line;
 	stringstream line_stream;
@@ -59,7 +115,7 @@ void Railway_model::load_railway_model(string filename)
 			railway_model.push_back(station_and_vector);
 			line_stream.clear();
 		}
-		
+
 	}
 	in.close();
 }

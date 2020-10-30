@@ -6,10 +6,10 @@
 
 class Passenger_van : public Van
 {
+public:
 	int current_amount_of_passengers;
 	int max_amount_of_passengers;
 
-public:
 	Passenger_van(int van_number, int van_empty_weight, int current_amount_of_passengers, int max_amount_of_passengers);
 	int weight_of_van();
 };

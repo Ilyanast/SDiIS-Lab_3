@@ -10,10 +10,16 @@
 
 using namespace std;
 
+struct Station_and_distance
+{
+	Station_info* station_info;
+	int distance;
+};
+
 struct Station_and_vector
 {
 	Station_info* station_info;
-	vector<Station_info*> connected_stations;
+	vector<Station_and_distance> connected_stations;
 };
 
 class Railway_model
@@ -21,6 +27,7 @@ class Railway_model
 	vector<Station_and_vector> railway_model;
 
 public:
-	void load_railway_model(string filename);
+	void load_railway_model_connections(string filename);
+	void load_railway_model_stations(string filename);
 	Railway_model();
 };
