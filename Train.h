@@ -9,6 +9,9 @@
 #include "Freight_van.h"
 #include "Passenger_van.h"
 #include "Route_params.h"
+#include "Railway_model.h"
+
+#define WAIT_ON_STATION 100;
 
 using namespace std;
 
@@ -18,6 +21,11 @@ class Train
 	int train_empty_max_speed;
 	int train_pulling_force;
 	int train_weight_of_vans;
+
+	bool is_on_station;
+	int time_to_wait_on_station;
+	int time_to_get_to_next_station;
+	Station* current_station;
 
 	vector <Route_params*> train_route;
 

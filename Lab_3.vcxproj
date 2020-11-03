@@ -175,7 +175,6 @@
     <ClCompile Include="Railway_model.cpp" />
     <ClCompile Include="Route_params.cpp" />
     <ClCompile Include="Station.cpp" />
-    <ClCompile Include="Station_info.cpp" />
     <ClCompile Include="Train.cpp" />
     <ClCompile Include="Van.cpp" />
   </ItemGroup>
@@ -190,7 +189,6 @@
     <ClInclude Include="Passenger_van.h" />
     <ClInclude Include="Route_params.h" />
     <ClInclude Include="Station.h" />
-    <ClInclude Include="Station_info.h" />
     <ClInclude Include="Station_type.h" />
     <ClInclude Include="Train.h" />
     <ClInclude Include="Van.h" />
