@@ -36,6 +36,62 @@ void Train::update_train_speed()
 	train_speed_with_cargo = train_empty_max_speed - get_speed_loss(train_weight_of_vans);
 }
 
+int Train::get_train_number()
+{
+	return train_number;
+}
+
+bool Train::is_on_last_station()
+{
+	return (current_station_num == train_route[train_route.size() - 1]->get_station_number());
+}
+
+int Train::get_time_to_next_station()
+{
+	int next_station_number = 0;
+
+	for (int i = 0; i < train_route.size(); i++) {
+		if (train_route[i]->get_station_number() == current_station_num) {
+			next_station_number = train_route[i + 1]->get_station_number();
+			break;
+		}
+	}
+
+	int pos_in_railway_model_vec = railway_model->get_pos_in_railway_model_vec(current_station_num);
+	int distance = railway_model->railway_model_vec[pos_in_railway_model_vec].connected_stations[railway_model->get_pos_in_connected_stations_vec(pos_in_railway_model_vec, next_station_number)].distance;
+	
+	return distance / train_speed_with_cargo;
+}
+
+int Train::get_time_to_wait_on_station()
+{
+	return train_route[railway_model->get_pos_in_railway_model_vec(current_station_num)]->get_wait_time();
+}
+
+void Train::add_elapsed_time(Time elapsed_time)
+{
+	this->elapsed_time += elapsed_time;
+}
+
+Time Train::get_elapsed_time()
+{
+	return elapsed_time;
+}
+
+void Train::clear_elapsed_time()
+{
+	elapsed_time = seconds(0);
+}
+
+void Train::move_to_next_station()
+{
+	for (int i = 0; i < train_route.size(); i++) {
+		if ((train_route[i]->get_station_number() == current_station_num)) {
+			current_station_num = train_route[i + 1]->get_station_number();
+			break;
+		}
+	}
+}
 
 void Train::load_route(string filename)
 {
@@ -59,6 +115,8 @@ void Train::load_route(string filename)
 		}
 	}
 	in.close();
+
+	current_station_num = train_route[0]->get_station_number();
 }
 
 void Train::add_locomative(int locomative_number, int locomative_max_speed, int locomative_pulling_force)
@@ -119,23 +177,8 @@ void Train::remove_van(int van_number)
 	delete van;
 }
 
-Train::Train(int locomative_number, int locomative_max_speed, int locomative_pulling_force)
+Train::Train(int train_number, Railway_model* railway_model)
 {
-	Locomative* locomative = new Locomative(locomative_number, locomative_max_speed, locomative_pulling_force);
-	locomative_vector.push_back(locomative);
-
-	train_empty_max_speed = locomative_max_speed;
-	train_pulling_force = locomative_pulling_force;
-	train_speed_with_cargo = 0;
-	train_weight_of_vans = 0;
-}
-
-Train::~Train()
-{
-	for (int i = 0; i < locomative_vector.size(); i++) {
-		delete locomative_vector[i];
-	}
-	for (int i = 0; i < van_vector.size(); i++) {
-		delete van_vector[i];
-	}
+	this->railway_model = railway_model;
+	this->train_number = train_number;
 }

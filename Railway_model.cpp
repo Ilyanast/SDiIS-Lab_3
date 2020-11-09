@@ -3,19 +3,51 @@
 void Railway_model::add_connected_station(int basic_station_num, int connected_station_num, int distance)
 {
 	Station_and_distance station_and_distance;
+	station_and_distance.distance = distance;
+	station_and_distance.connected_station_num = connected_station_num;
+	railway_model_vec[get_pos_in_railway_model_vec(basic_station_num)].connected_stations.push_back(station_and_distance);
+}
 
-	for (int i = 0; i < railway_model.size(); i++) {
-		if (railway_model[i].station_info->station_number == connected_station_num) {
-			station_and_distance.station_info = railway_model[i].station_info;
-			station_and_distance.distance = distance;
+void Railway_model::train_modeling(Train& train, sf::Time elapsed_time)
+{
+	if (train.is_on_route) {
+		train.add_elapsed_time(elapsed_time);
 
-			for (int j = 0; j < railway_model.size(); j++) {
-				if (railway_model[j].station_info->station_number == basic_station_num) {
-					railway_model[j].connected_stations.push_back(station_and_distance);
-					break;
-				}
+		if (train.is_on_station && (train.get_elapsed_time() >= sf::seconds(train.get_time_to_wait_on_station()))) {
+			cout << "Action_complete" << endl;
+			if (train.is_on_last_station()) {
+				train.is_on_route = false;
+
+				train.clear_elapsed_time();
+				return;
 			}
-			break;
+			train.is_on_station = false;
+			train.clear_elapsed_time();
+		}
+
+		if (!train.is_on_station && train.get_elapsed_time() >= sf::seconds(train.get_time_to_next_station())) {
+			cout << "Arrived at station" << endl;
+			train.is_on_station = true;
+			train.move_to_next_station();
+			train.clear_elapsed_time();
+		}
+	}
+}
+
+int Railway_model::get_pos_in_connected_stations_vec(int pos_in_railway_model_vec, int station_number)
+{
+	for (int i = 0; i < railway_model_vec[pos_in_railway_model_vec].connected_stations.size(); i++) {
+		if (railway_model_vec[pos_in_railway_model_vec].connected_stations[i].connected_station_num == station_number) {
+			return i;
+		}
+	}
+}
+
+int Railway_model::get_pos_in_railway_model_vec(int station_number)
+{
+	for (int i = 0; i < railway_model_vec.size(); i++) {
+		if (railway_model_vec[i].station_info->station_number == station_number) {
+			return i;
 		}
 	}
 }
@@ -100,12 +132,17 @@ void Railway_model::load_railway_model_stations(string filename)
 				continue;
 			}
 			station_and_vector.station_info = station_info;
-			railway_model.push_back(station_and_vector);
+			railway_model_vec.push_back(station_and_vector);
 			line_stream.clear();
 		}
 
 	}
 	in.close();
+}
+
+Railway_model::Railway_model()
+{
+
 }
 
 Station_info::Station_info(Station* station, int station_number, int x_pos, int y_pos)
