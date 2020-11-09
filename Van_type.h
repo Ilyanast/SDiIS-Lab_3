@@ -1,7 +1,8 @@
 #pragma once
 
-enum class Van_type
+enum class Train_element_type
 {
-	FREIGHT = 0,
-	PASSENGER
+	LOCOMATIVE = 0,
+	PASSENGER,
+	FREIGHT
 };

@@ -49,7 +49,10 @@
     <Filter Include="Файлы заголовков\Train\Route">
       <UniqueIdentifier>{aa7c5f18-d52b-417a-a4b9-cd84008a2494}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы ресурсов\Train_route">
+    <Filter Include="Файлы ресурсов\Train">
+      <UniqueIdentifier>{60b3afc6-fcea-4875-9a22-94393b426ee8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы ресурсов\Train\Train_route">
       <UniqueIdentifier>{95612b8f-d893-4fd0-ba56-4e7d8212fd18}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -137,19 +140,28 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="train_1_route.txt">
-      <Filter>Файлы ресурсов\Train_route</Filter>
+      <Filter>Файлы ресурсов\Train\Train_route</Filter>
     </Text>
     <Text Include="train_2_route.txt">
-      <Filter>Файлы ресурсов\Train_route</Filter>
+      <Filter>Файлы ресурсов\Train\Train_route</Filter>
     </Text>
     <Text Include="train_3_route.txt">
-      <Filter>Файлы ресурсов\Train_route</Filter>
+      <Filter>Файлы ресурсов\Train\Train_route</Filter>
     </Text>
     <Text Include="railway_model_stations.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
     <Text Include="railway_model_connections.txt">
       <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="train_1.txt">
+      <Filter>Файлы ресурсов\Train</Filter>
+    </Text>
+    <Text Include="train_2.txt">
+      <Filter>Файлы ресурсов\Train</Filter>
+    </Text>
+    <Text Include="train_3.txt">
+      <Filter>Файлы ресурсов\Train</Filter>
     </Text>
   </ItemGroup>
 </Project>

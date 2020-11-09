@@ -197,8 +197,11 @@
   <ItemGroup>
     <Text Include="railway_model_connections.txt" />
     <Text Include="railway_model_stations.txt" />
+    <Text Include="train_1.txt" />
     <Text Include="train_1_route.txt" />
+    <Text Include="train_2.txt" />
     <Text Include="train_2_route.txt" />
+    <Text Include="train_3.txt" />
     <Text Include="train_3_route.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

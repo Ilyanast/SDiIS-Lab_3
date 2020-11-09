@@ -14,6 +14,7 @@ class Route_params
 
 public:
 	Route_params(int station_number, Action_type action_on_station);
+	Action_type get_action_on_station();
 	int get_wait_time();
 	int get_station_number();
 };

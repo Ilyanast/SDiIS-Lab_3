@@ -5,6 +5,15 @@ int Train::get_speed_loss(int weight)
 	return int((double(weight) / train_pulling_force) * train_empty_max_speed);
 }
 
+int Train::get_pos_in_train_route_vec(int station_number)
+{
+	for (int i = 0; i < train_route.size(); i++) {
+		if ((train_route[i]->get_station_number() == current_station_num)) {
+			return i;
+		}
+	}
+}
+
 
 void Train::update_train_weight(int van_weight)
 {
@@ -85,12 +94,31 @@ void Train::clear_elapsed_time()
 
 void Train::move_to_next_station()
 {
-	for (int i = 0; i < train_route.size(); i++) {
-		if ((train_route[i]->get_station_number() == current_station_num)) {
-			current_station_num = train_route[i + 1]->get_station_number();
-			break;
-		}
+	current_station_num = train_route[get_pos_in_train_route_vec(current_station_num) + 1]->get_station_number();
+}
+
+void Train::do_action_on_station()
+{
+	Action_type action_on_station;
+	action_on_station =	train_route[get_pos_in_train_route_vec(current_station_num)]->get_action_on_station();
+
+	switch (action_on_station)
+	{
+	case Action_type::TRANSIT:
+		break;
+
+	case Action_type::PARKING:
+		break;
+
+	case Action_type::LOADING:
+		//railway_model->railway_model_vec[railway_model->get_pos_in_railway_model_vec(current_station_num)].station_info->station
+
+		//break;
+
+	case Action_type::UNLOADING:
+		break;
 	}
+
 }
 
 void Train::load_route(string filename)
@@ -117,6 +145,60 @@ void Train::load_route(string filename)
 	in.close();
 
 	current_station_num = train_route[0]->get_station_number();
+}
+
+void Train::load_train(string filename)
+{
+	string line;
+	stringstream line_stream;
+
+	int train_element_type_num;
+	Train_element_type train_element_type;
+
+	int train_element_number;
+	int locomative_max_speed, locomative_pulling_force;
+	int	van_empty_weight, van_current_parameter, van_max_parameter;
+
+	ifstream in(filename);
+
+	if (in.is_open())
+	{
+		while (getline(in, line))
+		{
+			line_stream.str(line);
+			line_stream >> train_element_type_num;
+			train_element_type = Train_element_type(train_element_type_num);
+
+			switch (train_element_type)
+			{
+			case Train_element_type::LOCOMATIVE:
+			{
+				line_stream >> train_element_number >> locomative_max_speed >> locomative_pulling_force;
+				add_locomative(train_element_number, locomative_max_speed, locomative_pulling_force);
+				break;
+			}
+			case Train_element_type::PASSENGER: 
+			{
+				line_stream >> train_element_number >> van_empty_weight >> van_current_parameter >> van_max_parameter;
+				add_passenger_van(train_element_number, van_empty_weight, van_current_parameter, van_max_parameter);
+				break;
+			}
+
+			case Train_element_type::FREIGHT:
+			{
+				line_stream >> train_element_number >> van_empty_weight >> van_current_parameter >> van_max_parameter;
+				add_freight_van(train_element_number, van_empty_weight, van_current_parameter, van_max_parameter);
+				break;
+			}
+
+			default:
+				break;
+			}
+
+			line_stream.clear();
+		}
+	}
+	in.close();
 }
 
 void Train::add_locomative(int locomative_number, int locomative_max_speed, int locomative_pulling_force)

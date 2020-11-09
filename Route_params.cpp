@@ -6,6 +6,11 @@ Route_params::Route_params(int station_number, Action_type action_on_station)
 	this->action_on_station = action_on_station;
 }
 
+Action_type Route_params::get_action_on_station()
+{
+	return action_on_station;
+}
+
 int Route_params::get_wait_time()
 {
 	switch (action_on_station)
