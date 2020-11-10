@@ -11,3 +11,10 @@ int Freight_van::weight_of_van()
 {
 	return van_empty_weight + current_cargo_weight;
 }
+
+int Freight_van::load_and_get_weight_of_remainder(int weight_of_cargo_to_load)
+{
+	int free_space = max_cargo_weight - current_cargo_weight;
+	current_cargo_weight = max_cargo_weight;
+	return weight_of_cargo_to_load - free_space;
+}

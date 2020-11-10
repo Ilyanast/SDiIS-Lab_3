@@ -110,9 +110,6 @@
     <ClInclude Include="Station.h">
       <Filter>Файлы заголовков\Station</Filter>
     </ClInclude>
-    <ClInclude Include="Van_type.h">
-      <Filter>Файлы заголовков\Train\Van</Filter>
-    </ClInclude>
     <ClInclude Include="Station_type.h">
       <Filter>Файлы заголовков\Station</Filter>
     </ClInclude>
@@ -136,6 +133,9 @@
     </ClInclude>
     <ClInclude Include="Van.h">
       <Filter>Файлы заголовков\Train</Filter>
+    </ClInclude>
+    <ClInclude Include="Train_element_type.h">
+      <Filter>Файлы заголовков\Train\Van</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

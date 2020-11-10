@@ -14,6 +14,43 @@ int Train::get_pos_in_train_route_vec(int station_number)
 	}
 }
 
+void Train::load_train()
+{
+	Station* current_station = railway_model->railway_model_vec[railway_model->get_pos_in_railway_model_vec(current_station_num)].station_info->station;
+	Station_type current_station_type = current_station->get_station_type();
+
+	switch (current_station_type)
+	{
+	case Station_type::FREIGHT:
+		Freight_station *freight_station = (Freight_station*) current_station;
+
+		int weight_of_cargo_to_load = freight_station->get_weight_of_cargo_to_load();
+		int available_space_for_cargo = get_available_space_for_cargo();
+
+		break;
+
+	case Station_type::PASSENGER:
+	/////	load_passengers();
+		break;
+
+	case Station_type::PASSENGER_FREIGHT:
+	//	load_cargo();
+	//	load_passengers();
+		break;
+
+	}
+}
+
+int Train::get_available_space_for_cargo()
+{
+	int available_space_for_cargo;
+	for (int i = 0; i < van_vector.size(); i++) {
+		if (van_vector[i]->get_train_element_type() == Train_element_type::FREIGHT) {
+			(Freight_van*) van_vector[i].
+		}
+	}
+}
+
 
 void Train::update_train_weight(int van_weight)
 {
@@ -111,9 +148,8 @@ void Train::do_action_on_station()
 		break;
 
 	case Action_type::LOADING:
-		//railway_model->railway_model_vec[railway_model->get_pos_in_railway_model_vec(current_station_num)].station_info->station
-
-		//break;
+		load_train();
+		break;
 
 	case Action_type::UNLOADING:
 		break;
@@ -223,41 +259,6 @@ void Train::add_passenger_van(int van_number, int van_empty_weight, int current_
 	update_train_weight(passenger_van->weight_of_van());
 }
 
-void Train::remove_locomative(int locomative_number)
-{
-	if (locomative_vector.size() == 1)
-		return;
-
-	Locomative* locomative = nullptr;
-
-	for (int i = 0; i < locomative_vector.size(); i++) {
-		if (locomative_vector[i]->get_locomative_number() == locomative_number) {
-			locomative = locomative_vector[i];
-			locomative_vector.erase(locomative_vector.begin() + i);
-			break;
-		}
-	}
-
-	update_train_empty_max_speed();
-	update_train_pulling_force(-(locomative->get_locomative_pulling_force()));
-	delete locomative;
-}
-
-void Train::remove_van(int van_number)
-{
-	Van* van = nullptr;
-
-	for (int i = 0; i < van_vector.size(); i++) {
-		if (van_vector[i]->get_van_number() == van_number) {
-			van = van_vector[i];
-			van_vector.erase(van_vector.begin() + i);
-			break;
-		}
-	}
-
-	update_train_weight(-(van->weight_of_van()));
-	delete van;
-}
 
 Train::Train(int train_number, Railway_model* railway_model)
 {

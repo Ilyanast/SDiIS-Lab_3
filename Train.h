@@ -12,6 +12,7 @@
 #include "Route_params.h"
 #include "Railway_model.h"
 
+
 using namespace std;
 using namespace sf;
 
@@ -39,19 +40,18 @@ class Train
 	void add_freight_van(int van_number, int van_empty_weight, int current_cargo_weight, int max_cargo_weight);
 	void add_passenger_van(int van_number, int van_empty_weight, int current_amount_of_passengers, int max_amount_of_passengers);
 
-	// Хотел дополнительно реализовать отдельное удаление вагонов. Может позже добавлю.
-	void remove_locomative(int locomative_number);
-	void remove_van(int van_number);
-
 	int get_speed_loss(int weight);
 	int get_pos_in_train_route_vec(int station_number);
+
+	void load_train();
+
+	int get_available_space_for_cargo();
 
 	void update_train_weight(int van_weight);
 	void update_train_pulling_force(int locomative_pulling_force);
 	void update_train_empty_max_speed();
 	void update_train_speed();
 
-	
 
 public:
 	bool is_on_station = true;

@@ -192,7 +192,7 @@
     <ClInclude Include="Station_type.h" />
     <ClInclude Include="Train.h" />
     <ClInclude Include="Van.h" />
-    <ClInclude Include="Van_type.h" />
+    <ClInclude Include="Train_element_type.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="railway_model_connections.txt" />
