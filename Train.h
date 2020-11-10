@@ -44,6 +44,10 @@ class Train
 	int get_pos_in_train_route_vec(int station_number);
 
 	void load_vans();
+	void unload_vans();
+
+	int unload_freight_vans();
+	int unload_passenger_vans();
 
 	int load_freight_vans_and_get_remainder(int weight_of_cargo_to_load);
 	int load_passenger_vans_and_get_remainder(int passengers_to_load);

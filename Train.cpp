@@ -46,12 +46,80 @@ void Train::load_vans()
 		int passengers_to_load = passenger_freight_station->get_passengers_to_load();
 		int weight_of_cargo_after_loading = load_freight_vans_and_get_remainder(weight_of_cargo_to_load);
 		int passengers_after_loading = load_passenger_vans_and_get_remainder(passengers_to_load);
-		update_train_weight((weight_of_cargo_to_load - weight_of_cargo_after_loading));
-		update_train_weight((weight_of_cargo_to_load - weight_of_cargo_after_loading));
+		update_train_weight((weight_of_cargo_to_load - weight_of_cargo_after_loading) + ((passengers_to_load - passengers_after_loading) * MIDDLE_PASSENGER_WEIGHT));
 		passenger_freight_station->set_weight_of_cargo_and_passengers(weight_of_cargo_after_loading, passengers_after_loading);
 		break;
 	}
 	}
+}
+
+void Train::unload_vans()
+{
+	Station* current_station = railway_model->railway_model_vec[railway_model->get_pos_in_railway_model_vec(current_station_num)].station_info->station;
+	Station_type current_station_type = current_station->get_station_type();
+
+	switch (current_station_type)
+	{
+	case Station_type::FREIGHT:
+	{
+		Freight_station* freight_station = (Freight_station*)current_station;
+		int weight_of_cargo_was_on_station = freight_station->get_weight_of_cargo_to_load();
+		int unloaded_cargo_weight = unload_freight_vans();
+		update_train_weight(-unloaded_cargo_weight);
+		freight_station->set_weight_of_cargo_to_load(weight_of_cargo_was_on_station + unloaded_cargo_weight);
+		break;
+	}
+	case Station_type::PASSENGER:
+	{
+		Passenger_station* passenger_station = (Passenger_station*)current_station;
+		int passengers_was_on_station = passenger_station->get_passengers_to_load();
+		int unloaded_passengers = unload_passenger_vans();
+		update_train_weight(-(unloaded_passengers * MIDDLE_PASSENGER_WEIGHT));
+		passenger_station->set_passengers_to_load(passengers_was_on_station + unloaded_passengers);
+		break;
+	}
+	case Station_type::PASSENGER_FREIGHT:
+	{
+		Passenger_freight_station* passenger_freight_station = (Passenger_freight_station*)current_station;
+		int weight_of_cargo_was_on_station = passenger_freight_station->get_weight_of_cargo_to_load();
+		int unloaded_cargo_weight = unload_freight_vans();
+		int passengers_was_on_station = passenger_freight_station->get_passengers_to_load();
+		int unloaded_passengers = unload_passenger_vans();
+		update_train_weight((-(unloaded_passengers * MIDDLE_PASSENGER_WEIGHT) + (-unloaded_cargo_weight)));
+		passenger_freight_station->set_weight_of_cargo_and_passengers(weight_of_cargo_was_on_station + unloaded_cargo_weight, passengers_was_on_station + unloaded_passengers);
+		break;
+	}
+	}
+}
+
+int Train::unload_freight_vans()
+{
+	int unloaded_cargo_weight;
+	Freight_van* freight_van;
+
+	for (int i = 0; i < van_vector.size(); i++) {
+		if (van_vector[i]->get_train_element_type() == Train_element_type::FREIGHT) {
+			freight_van = (Freight_van*)van_vector[i];
+			freight_van->unfill_and_increase_unloaded_cargo_weight(unloaded_cargo_weight);
+		}
+	}
+
+	return unloaded_cargo_weight;
+}
+
+int Train::unload_passenger_vans()
+{
+	int unloaded_passengers;
+	Passenger_van* passenger_van;
+
+	for (int i = 0; i < van_vector.size(); i++) {
+		if (van_vector[i]->get_train_element_type() == Train_element_type::PASSENGER) {
+			passenger_van = (Passenger_van*)van_vector[i];
+			passenger_van->unfill_and_increase_unloaded_passengers(unloaded_passengers);
+		}
+	}
+
+	return unloaded_passengers;
 }
 
 int Train::load_freight_vans_and_get_remainder(int weight_of_cargo_to_load)
@@ -183,6 +251,7 @@ void Train::do_action_on_station()
 		break;
 
 	case Action_type::UNLOADING:
+		unload_vans();
 		break;
 	}
 

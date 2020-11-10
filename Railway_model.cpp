@@ -14,12 +14,13 @@ void Railway_model::train_modeling(Train& train, sf::Time elapsed_time)
 		train.add_elapsed_time(elapsed_time);
 
 		if (train.is_on_station && (train.get_elapsed_time() >= sf::seconds(train.get_time_to_wait_on_station()))) {
+
 			train.do_action_on_station();
-			cout << "Action_complete" << endl;
+			cout << "Train " << train.get_train_number() << " : Action complete" << endl;
 
 			if (train.is_on_last_station()) {
 				train.is_on_route = false;
-				cout << "Route was ended" << endl;
+				cout << "Train " << train.get_train_number() << " : Route was ended" << endl;
 				train.clear_elapsed_time();
 				return;
 			}
@@ -29,9 +30,9 @@ void Railway_model::train_modeling(Train& train, sf::Time elapsed_time)
 		}
 
 		if (!train.is_on_station && train.get_elapsed_time() >= sf::seconds(train.get_time_to_next_station())) {
-			cout << "Arrived at station" << endl;
-			train.is_on_station = true;
+			cout << "Train " << train.get_train_number() << " : Arrived at station" << endl;
 			train.move_to_next_station();
+			train.is_on_station = true;
 			train.clear_elapsed_time();
 		}
 	}

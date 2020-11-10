@@ -25,3 +25,9 @@ void Freight_van::fill_and_decrease_weight_of_cargo_to_load(int& weight_of_cargo
 		weight_of_cargo_to_load -= free_space;
 	}
 }
+
+void Freight_van::unfill_and_increase_unloaded_cargo_weight(int& unloaded_cargo_weight)
+{
+	unloaded_cargo_weight += current_cargo_weight;
+	current_cargo_weight = 0;
+}
