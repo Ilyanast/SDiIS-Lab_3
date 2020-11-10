@@ -2,7 +2,7 @@
 
 #include "Action_type.h"
 
-#define PARKING_TIME_S 5
+#define PARKING_TIME_S 4
 #define TRANSIT_TIME_S 0
 #define LOADING_TIME_S 4
 #define UNLOADING_TIME_S 4

@@ -12,9 +12,16 @@ int Freight_van::weight_of_van()
 	return van_empty_weight + current_cargo_weight;
 }
 
-int Freight_van::load_and_get_weight_of_remainder(int weight_of_cargo_to_load)
+void Freight_van::fill_and_decrease_weight_of_cargo_to_load(int& weight_of_cargo_to_load)
 {
 	int free_space = max_cargo_weight - current_cargo_weight;
-	current_cargo_weight = max_cargo_weight;
-	return weight_of_cargo_to_load - free_space;
+	
+	if (weight_of_cargo_to_load <= free_space) {
+		current_cargo_weight += weight_of_cargo_to_load;
+		weight_of_cargo_to_load = 0;
+	}
+	else {
+		current_cargo_weight += free_space;
+		weight_of_cargo_to_load -= free_space;
+	}
 }

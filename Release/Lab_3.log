@@ -1,13 +1,19 @@
-﻿  Train.cpp
+﻿  Freight_station.cpp
+  Lab_3.cpp
+  Railway_model.cpp
+D:\ППвИС\SDiIS-Lab_3\Railway_model.cpp(16,104): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\ППвИС\SDiIS-Lab_3\Railway_model.cpp(31,101): warning C4244: аргумент: преобразование "int" в "float", возможна потеря данных
+D:\ППвИС\SDiIS-Lab_3\Railway_model.cpp(42,20): warning C4018: <: несоответствие типов со знаком и без знака
+D:\ППвИС\SDiIS-Lab_3\Railway_model.cpp(51,20): warning C4018: <: несоответствие типов со знаком и без знака
+  Train.cpp
 D:\ППвИС\SDiIS-Lab_3\Train.cpp(10,20): warning C4018: <: несоответствие типов со знаком и без знака
-D:\ППвИС\SDiIS-Lab_3\Train.cpp(34,20): warning C4018: <: несоответствие типов со знаком и без знака
-D:\ППвИС\SDiIS-Lab_3\Train.cpp(62,20): warning C4018: <: несоответствие типов со знаком и без знака
-D:\ППвИС\SDiIS-Lab_3\Train.cpp(233,20): warning C4018: <: несоответствие типов со знаком и без знака
-D:\ППвИС\SDiIS-Lab_3\Train.cpp(250,20): warning C4018: <: несоответствие типов со знаком и без знака
+D:\ППвИС\SDiIS-Lab_3\Train.cpp(61,20): warning C4018: <: несоответствие типов со знаком и без знака
+D:\ППвИС\SDiIS-Lab_3\Train.cpp(75,20): warning C4018: <: несоответствие типов со знаком и без знака
+D:\ППвИС\SDiIS-Lab_3\Train.cpp(102,20): warning C4018: <: несоответствие типов со знаком и без знака
+D:\ППвИС\SDiIS-Lab_3\Train.cpp(130,20): warning C4018: <: несоответствие типов со знаком и без знака
   Создание кода
-D:\ППвИС\SDiIS-Lab_3\Train.cpp(15): warning C4715: Train::get_pos_in_train_route_vec: значение возвращается не при всех путях выполнения
-  5 of 493 functions ( 1.0%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
-    4 functions had inline decision re-evaluated but remain unchanged
+  2 of 511 functions ( 0.4%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    15 functions had inline decision re-evaluated but remain unchanged
   Создание кода завершено
   Lab_3.vcxproj -> D:\ППвИС\SDiIS-Lab_3\Release\Lab_3.exe

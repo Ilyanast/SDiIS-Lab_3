@@ -14,7 +14,7 @@ int Train::get_pos_in_train_route_vec(int station_number)
 	}
 }
 
-void Train::load_train()
+void Train::load_vans()
 {
 	Station* current_station = railway_model->railway_model_vec[railway_model->get_pos_in_railway_model_vec(current_station_num)].station_info->station;
 	Station_type current_station_type = current_station->get_station_type();
@@ -22,33 +22,64 @@ void Train::load_train()
 	switch (current_station_type)
 	{
 	case Station_type::FREIGHT:
-		Freight_station *freight_station = (Freight_station*) current_station;
-
+	{
+		Freight_station* freight_station = (Freight_station*)current_station;
 		int weight_of_cargo_to_load = freight_station->get_weight_of_cargo_to_load();
-		int available_space_for_cargo = get_available_space_for_cargo();
-
+		int weight_of_cargo_after_loading = load_freight_vans_and_get_remainder(weight_of_cargo_to_load);
+		update_train_weight((weight_of_cargo_to_load - weight_of_cargo_after_loading));
+		freight_station->set_weight_of_cargo_to_load(weight_of_cargo_after_loading);
 		break;
-
+	}
 	case Station_type::PASSENGER:
-	/////	load_passengers();
+	{
+		Passenger_station* passenger_station = (Passenger_station*)current_station;
+		int passengers_to_load = passenger_station->get_passengers_to_load();
+		int passengers_after_loading = load_passenger_vans_and_get_remainder(passengers_to_load);
+		update_train_weight((passengers_to_load - passengers_after_loading) * MIDDLE_PASSENGER_WEIGHT);
+		passenger_station->set_passengers_to_load(passengers_after_loading);
 		break;
-
+	}
 	case Station_type::PASSENGER_FREIGHT:
-	//	load_cargo();
-	//	load_passengers();
+	{
+		Passenger_freight_station* passenger_freight_station = (Passenger_freight_station*)current_station;
+		int weight_of_cargo_to_load = passenger_freight_station->get_weight_of_cargo_to_load();
+		int passengers_to_load = passenger_freight_station->get_passengers_to_load();
+		int weight_of_cargo_after_loading = load_freight_vans_and_get_remainder(weight_of_cargo_to_load);
+		int passengers_after_loading = load_passenger_vans_and_get_remainder(passengers_to_load);
+		update_train_weight((weight_of_cargo_to_load - weight_of_cargo_after_loading));
+		update_train_weight((weight_of_cargo_to_load - weight_of_cargo_after_loading));
+		passenger_freight_station->set_weight_of_cargo_and_passengers(weight_of_cargo_after_loading, passengers_after_loading);
 		break;
-
+	}
 	}
 }
 
-int Train::get_available_space_for_cargo()
+int Train::load_freight_vans_and_get_remainder(int weight_of_cargo_to_load)
 {
-	int available_space_for_cargo;
+	Freight_van* freight_van;
+
 	for (int i = 0; i < van_vector.size(); i++) {
 		if (van_vector[i]->get_train_element_type() == Train_element_type::FREIGHT) {
-			(Freight_van*) van_vector[i].
+			freight_van = (Freight_van*)van_vector[i];
+			freight_van->fill_and_decrease_weight_of_cargo_to_load(weight_of_cargo_to_load);
 		}
 	}
+
+	return weight_of_cargo_to_load;
+}
+
+int Train::load_passenger_vans_and_get_remainder(int passengers_to_load)
+{
+	Passenger_van* passenger_van;
+
+	for (int i = 0; i < van_vector.size(); i++) {
+		if (van_vector[i]->get_train_element_type() == Train_element_type::PASSENGER) {
+			passenger_van = (Passenger_van*)van_vector[i];
+			passenger_van->fill_and_decrease_passengers_to_load(passengers_to_load);
+		}
+	}
+
+	return passengers_to_load;
 }
 
 
@@ -105,7 +136,7 @@ int Train::get_time_to_next_station()
 
 	int pos_in_railway_model_vec = railway_model->get_pos_in_railway_model_vec(current_station_num);
 	int distance = railway_model->railway_model_vec[pos_in_railway_model_vec].connected_stations[railway_model->get_pos_in_connected_stations_vec(pos_in_railway_model_vec, next_station_number)].distance;
-	
+
 	return distance / train_speed_with_cargo;
 }
 
@@ -137,7 +168,7 @@ void Train::move_to_next_station()
 void Train::do_action_on_station()
 {
 	Action_type action_on_station;
-	action_on_station =	train_route[get_pos_in_train_route_vec(current_station_num)]->get_action_on_station();
+	action_on_station = train_route[get_pos_in_train_route_vec(current_station_num)]->get_action_on_station();
 
 	switch (action_on_station)
 	{
@@ -148,7 +179,7 @@ void Train::do_action_on_station()
 		break;
 
 	case Action_type::LOADING:
-		load_train();
+		load_vans();
 		break;
 
 	case Action_type::UNLOADING:
@@ -213,7 +244,7 @@ void Train::load_train(string filename)
 				add_locomative(train_element_number, locomative_max_speed, locomative_pulling_force);
 				break;
 			}
-			case Train_element_type::PASSENGER: 
+			case Train_element_type::PASSENGER:
 			{
 				line_stream >> train_element_number >> van_empty_weight >> van_current_parameter >> van_max_parameter;
 				add_passenger_van(train_element_number, van_empty_weight, van_current_parameter, van_max_parameter);

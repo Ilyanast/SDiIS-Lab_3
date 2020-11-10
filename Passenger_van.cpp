@@ -11,3 +11,18 @@ int Passenger_van::weight_of_van()
 {
 	return van_empty_weight + (current_amount_of_passengers * MIDDLE_PASSENGER_WEIGHT);
 }
+
+void Passenger_van::fill_and_decrease_passengers_to_load(int& passengers_to_load)
+{
+	int free_space = max_amount_of_passengers - current_amount_of_passengers;
+
+	if (passengers_to_load <= free_space) {
+		current_amount_of_passengers += passengers_to_load;
+		passengers_to_load = 0;
+	}
+	else {
+		passengers_to_load -= free_space;
+		current_amount_of_passengers += free_space;
+	}
+}
+
