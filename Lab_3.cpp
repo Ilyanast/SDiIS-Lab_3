@@ -15,7 +15,7 @@ int main()
 	train_2->load_train("train_2.txt");
 	train_2->load_route("train_2_route.txt");
 
-	sf::RenderWindow window(sf::VideoMode(500, 500), "SFML works!");
+	sf::RenderWindow window(sf::VideoMode(500, 500), "Railway model");
 
 	sf::Texture BackgroundTexture;
 	sf::Sprite background;
@@ -31,6 +31,8 @@ int main()
         sf::Event event;
 		elapsed_time = clock.restart();
 
+		window.clear();
+
         while (window.pollEvent(event))
         {
 
@@ -40,8 +42,10 @@ int main()
         }
 
 		railway_model.train_modeling(*train_1, elapsed_time);
-	//	railway_model.train_modeling(*train_2, elapsed_time);
+		railway_model.train_modeling(*train_2, elapsed_time);
+		railway_model.draw_train(*train_1, window, elapsed_time);
 
+		window.draw(background);
         window.display();
 
     }

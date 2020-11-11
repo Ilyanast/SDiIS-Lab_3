@@ -10,6 +10,7 @@
 #include "Train.h"
 
 using namespace std;
+using namespace sf;
 
 struct Station_info
 {
@@ -35,12 +36,14 @@ struct Station_and_vector
 class Train;
 class Railway_model
 {
-	
 	void add_connected_station(int basic_station_num, int connected_station_numm, int distance);
 	
 public:
 	vector<Station_and_vector> railway_model_vec;
-	void train_modeling(Train& train, sf::Time elapsed_time);
+
+	void train_modeling(Train& train, Time elapsed_time);
+	void draw_train(Train& train, RenderWindow& window, Time elapsed_time);
+
 	int get_pos_in_connected_stations_vec(int pos_in_railway_model_vec, int station_number);
 	int get_pos_in_railway_model_vec(int station_number);
 	void load_railway_model_connections(string filename);

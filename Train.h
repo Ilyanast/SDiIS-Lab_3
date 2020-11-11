@@ -67,6 +67,7 @@ public:
 	int get_train_number();
 	int get_time_to_next_station();
 	int get_time_to_wait_on_station();
+	int get_current_station_num();
 
 	Time get_elapsed_time();
 	void add_elapsed_time(Time time);

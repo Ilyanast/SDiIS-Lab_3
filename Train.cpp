@@ -94,7 +94,7 @@ void Train::unload_vans()
 
 int Train::unload_freight_vans()
 {
-	int unloaded_cargo_weight;
+	int unloaded_cargo_weight = 0;
 	Freight_van* freight_van;
 
 	for (int i = 0; i < van_vector.size(); i++) {
@@ -210,7 +210,12 @@ int Train::get_time_to_next_station()
 
 int Train::get_time_to_wait_on_station()
 {
-	return train_route[railway_model->get_pos_in_railway_model_vec(current_station_num)]->get_wait_time();
+	return train_route[get_pos_in_train_route_vec(current_station_num)]->get_wait_time();
+}
+
+int Train::get_current_station_num()
+{
+	return current_station_num;
 }
 
 void Train::add_elapsed_time(Time elapsed_time)

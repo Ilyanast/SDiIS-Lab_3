@@ -20,8 +20,8 @@ void Railway_model::train_modeling(Train& train, sf::Time elapsed_time)
 
 			if (train.is_on_last_station()) {
 				train.is_on_route = false;
-				cout << "Train " << train.get_train_number() << " : Route was ended" << endl;
 				train.clear_elapsed_time();
+				cout << "Train " << train.get_train_number() << " : Route was ended" << endl;
 				return;
 			}
 
@@ -30,12 +30,17 @@ void Railway_model::train_modeling(Train& train, sf::Time elapsed_time)
 		}
 
 		if (!train.is_on_station && train.get_elapsed_time() >= sf::seconds(train.get_time_to_next_station())) {
-			cout << "Train " << train.get_train_number() << " : Arrived at station" << endl;
 			train.move_to_next_station();
 			train.is_on_station = true;
 			train.clear_elapsed_time();
+			cout << "Train " << train.get_train_number() << " : Arrived at station " << train.get_current_station_num() << endl;
 		}
 	}
+}
+
+void Railway_model::draw_train(Train& train, RenderWindow& window, sf::Time elapsed_time)
+{
+	
 }
 
 int Railway_model::get_pos_in_connected_stations_vec(int pos_in_railway_model_vec, int station_number)
