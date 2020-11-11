@@ -11,6 +11,7 @@
 #include "Passenger_van.h"
 #include "Route_params.h"
 #include "Railway_model.h"
+#include "Coords.h"
 
 
 using namespace std;
@@ -27,7 +28,7 @@ class Train
 
 	int current_station_num = 0;
 
-	sf::Time elapsed_time;
+	Time elapsed_time;
 
 	Railway_model* railway_model;
 
@@ -62,12 +63,17 @@ public:
 	bool is_on_station = true;
 	bool is_on_route = true;
 
+	Coords current_train_coords;
+
+	sf::CircleShape circle;
+
 	bool is_on_last_station();
 
 	int get_train_number();
 	int get_time_to_next_station();
 	int get_time_to_wait_on_station();
 	int get_current_station_num();
+	int get_next_station_num();
 
 	Time get_elapsed_time();
 	void add_elapsed_time(Time time);

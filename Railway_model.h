@@ -8,6 +8,7 @@
 #include "Passanger_freight_station.h"
 #include <SFML/Graphics.hpp>
 #include "Train.h"
+#include "Coords.h"
 
 using namespace std;
 using namespace sf;
@@ -16,9 +17,9 @@ struct Station_info
 {
 	Station* station;
 	int station_number;
-	int x_pos, y_pos;
+	Coords station_coords;
 
-	Station_info(Station* station, int station_number, int x_pos, int y_pos);
+	Station_info(Station* station, int station_number, Coords station_coords);
 };
 
 struct Station_and_distance

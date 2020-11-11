@@ -137,6 +137,9 @@
     <ClInclude Include="Train_element_type.h">
       <Filter>Файлы заголовков\Train\Van</Filter>
     </ClInclude>
+    <ClInclude Include="Coords.h">
+      <Filter>Файлы заголовков\Station</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="train_1_route.txt">

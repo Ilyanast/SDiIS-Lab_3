@@ -218,6 +218,11 @@ int Train::get_current_station_num()
 	return current_station_num;
 }
 
+int Train::get_next_station_num()
+{
+	return train_route[get_pos_in_train_route_vec(current_station_num) + 1]->get_station_number();
+}
+
 void Train::add_elapsed_time(Time elapsed_time)
 {
 	this->elapsed_time += elapsed_time;
@@ -235,7 +240,9 @@ void Train::clear_elapsed_time()
 
 void Train::move_to_next_station()
 {
-	current_station_num = train_route[get_pos_in_train_route_vec(current_station_num) + 1]->get_station_number();
+	current_station_num = get_next_station_num();
+	current_train_coords.x_pos = railway_model->railway_model_vec[railway_model->get_pos_in_railway_model_vec(get_current_station_num())].station_info->station_coords.x_pos;
+	current_train_coords.y_pos = railway_model->railway_model_vec[railway_model->get_pos_in_railway_model_vec(get_current_station_num())].station_info->station_coords.y_pos;
 }
 
 void Train::do_action_on_station()
@@ -286,6 +293,8 @@ void Train::load_route(string filename)
 	in.close();
 
 	current_station_num = train_route[0]->get_station_number();
+	current_train_coords.x_pos = railway_model->railway_model_vec[railway_model->get_pos_in_railway_model_vec(current_station_num)].station_info->station_coords.x_pos;
+	current_train_coords.y_pos = railway_model->railway_model_vec[railway_model->get_pos_in_railway_model_vec(current_station_num)].station_info->station_coords.y_pos;
 }
 
 void Train::load_train(string filename)
@@ -369,4 +378,8 @@ Train::Train(int train_number, Railway_model* railway_model)
 {
 	this->railway_model = railway_model;
 	this->train_number = train_number;
+
+	circle.setRadius(10.f);
+	circle.setFillColor(Color::Blue);
+	circle.setOrigin(circle.getRadius(), circle.getRadius());
 }

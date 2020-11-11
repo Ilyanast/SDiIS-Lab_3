@@ -180,6 +180,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Action_type.h" />
+    <ClInclude Include="Coords.h" />
     <ClInclude Include="Freight_station.h" />
     <ClInclude Include="Freight_van.h" />
     <ClInclude Include="Railway_model.h" />

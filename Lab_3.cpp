@@ -25,11 +25,11 @@ int main()
 
 	sf::Clock clock;
 	sf::Time elapsed_time;
+	window.setFramerateLimit(180);
 
     while (window.isOpen())
     {
         sf::Event event;
-		elapsed_time = clock.restart();
 
 		window.clear();
 
@@ -41,11 +41,14 @@ int main()
             }
         }
 
+		elapsed_time = clock.restart();
 		railway_model.train_modeling(*train_1, elapsed_time);
-		railway_model.train_modeling(*train_2, elapsed_time);
-		railway_model.draw_train(*train_1, window, elapsed_time);
+	//	railway_model.train_modeling(*train_2, elapsed_time);
 
 		window.draw(background);
+
+		railway_model.draw_train(*train_1, window, elapsed_time);
+
         window.display();
 
     }
