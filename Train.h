@@ -70,7 +70,7 @@ public:
 	bool is_on_last_station();
 
 	int get_train_number();
-	int get_time_to_next_station();
+	float get_time_to_next_station();
 	int get_time_to_wait_on_station();
 	int get_current_station_num();
 	int get_next_station_num();
@@ -82,8 +82,9 @@ public:
 	void move_to_next_station();
 	void do_action_on_station();
 
-	void load_route(string filename);
-	void load_train(string filename);
+	void load_route(const string& filename);
+	void load_train(const string& filename);
 
 	Train(int train_number, Railway_model* railway_model);
+	~Train();
 };

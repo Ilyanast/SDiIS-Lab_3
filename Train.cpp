@@ -109,7 +109,7 @@ int Train::unload_freight_vans()
 
 int Train::unload_passenger_vans()
 {
-	int unloaded_passengers;
+	int unloaded_passengers = 0;
 	Passenger_van* passenger_van;
 
 	for (int i = 0; i < van_vector.size(); i++) {
@@ -191,7 +191,7 @@ bool Train::is_on_last_station()
 	return (current_station_num == train_route[train_route.size() - 1]->get_station_number());
 }
 
-int Train::get_time_to_next_station()
+float Train::get_time_to_next_station()
 {
 	int next_station_number = 0;
 
@@ -203,7 +203,7 @@ int Train::get_time_to_next_station()
 	}
 
 	int pos_in_railway_model_vec = railway_model->get_pos_in_railway_model_vec(current_station_num);
-	int distance = railway_model->railway_model_vec[pos_in_railway_model_vec].connected_stations[railway_model->get_pos_in_connected_stations_vec(pos_in_railway_model_vec, next_station_number)].distance;
+	float distance = railway_model->railway_model_vec[pos_in_railway_model_vec].connected_stations[railway_model->get_pos_in_connected_stations_vec(pos_in_railway_model_vec, next_station_number)].distance;
 
 	return distance / train_speed_with_cargo;
 }
@@ -269,7 +269,7 @@ void Train::do_action_on_station()
 
 }
 
-void Train::load_route(string filename)
+void Train::load_route(const string& filename)
 {
 	string line;
 	stringstream line_stream;
@@ -299,7 +299,7 @@ void Train::load_route(string filename)
 	current_train_coords.y_pos = railway_model->railway_model_vec[railway_model->get_pos_in_railway_model_vec(current_station_num)].station_info->station_coords.y_pos;
 }
 
-void Train::load_train(string filename)
+void Train::load_train(const string& filename)
 {
 	string line;
 	stringstream line_stream;
@@ -387,4 +387,17 @@ Train::Train(int train_number, Railway_model* railway_model)
 	circle.setRadius(10.f);
 	circle.setFillColor(Color::Blue);
 	circle.setOrigin(circle.getRadius(), circle.getRadius());
+}
+
+Train::~Train()
+{
+	for (int i = 0; i < van_vector.size(); i++) {
+		delete van_vector[i];
+	}
+	for (int i = 0; i < locomative_vector.size(); i++) {
+		delete locomative_vector[i];
+	}
+	for (int i = 0; i < train_route.size(); i++) {
+		delete train_route[i];
+	}
 }

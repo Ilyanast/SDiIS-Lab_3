@@ -39,9 +39,10 @@ struct Station_and_vector
 class Train;
 class Railway_model
 {
+	void move_train_to_new_coords(Train& train, Time elapsed_time);
 	void add_connected_station(int basic_station_num, int connected_station_numm, int distance);
-	void load_railway_model_connections(string railway_model_connections);
-	void load_railway_model_stations(string railway_model_stations);
+	void load_railway_model_connections(const string& railway_model_connections);
+	void load_railway_model_stations(const string& railway_model_stations);
 	
 public:
 	vector<Station_and_vector> railway_model_vec;
@@ -51,5 +52,7 @@ public:
 
 	int get_pos_in_connected_stations_vec(int pos_in_railway_model_vec, int station_number);
 	int get_pos_in_railway_model_vec(int station_number);
-	Railway_model(string railway_model_stations, string railway_model_connections);
+
+	Railway_model(const string& railway_model_stations, const string& railway_model_connections);
+	~Railway_model();
 };

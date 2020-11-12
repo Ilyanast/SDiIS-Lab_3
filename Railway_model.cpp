@@ -1,5 +1,20 @@
 #include "Railway_model.h"
 
+void Railway_model::move_train_to_new_coords(Train& train, Time elapsed_time)
+{
+	if (train.is_on_route && !train.is_on_station) {
+
+		float rate_of_change_x_pos = (railway_model_vec[get_pos_in_railway_model_vec(train.get_next_station_num())].station_info->station_coords.x_pos -
+			railway_model_vec[get_pos_in_railway_model_vec(train.get_current_station_num())].station_info->station_coords.x_pos) / (train.get_time_to_next_station() * 1000);
+
+		float rate_of_change_y_pos = (railway_model_vec[get_pos_in_railway_model_vec(train.get_next_station_num())].station_info->station_coords.y_pos -
+			railway_model_vec[get_pos_in_railway_model_vec(train.get_current_station_num())].station_info->station_coords.y_pos) / (train.get_time_to_next_station() * 1000);
+
+		train.current_train_coords.x_pos += rate_of_change_x_pos * elapsed_time.asMilliseconds();
+		train.current_train_coords.y_pos += rate_of_change_y_pos * elapsed_time.asMilliseconds();
+	}
+}
+
 void Railway_model::add_connected_station(int basic_station_num, int connected_station_num, int distance)
 {
 	Station_and_distance station_and_distance;
@@ -40,19 +55,7 @@ void Railway_model::train_modeling(Train& train, sf::Time elapsed_time)
 
 void Railway_model::draw_train(Train& train, RenderWindow& window, sf::Time elapsed_time)
 {
-
-	if (train.is_on_route && !train.is_on_station) {
-
-		float rate_of_change_x_pos = (railway_model_vec[get_pos_in_railway_model_vec(train.get_next_station_num())].station_info->station_coords.x_pos -
-			railway_model_vec[get_pos_in_railway_model_vec(train.get_current_station_num())].station_info->station_coords.x_pos) / ((float)train.get_time_to_next_station() * 1000);
-
-		float rate_of_change_y_pos = (railway_model_vec[get_pos_in_railway_model_vec(train.get_next_station_num())].station_info->station_coords.y_pos -
-			railway_model_vec[get_pos_in_railway_model_vec(train.get_current_station_num())].station_info->station_coords.y_pos) / ((float)train.get_time_to_next_station() * 1000);
-
-		train.current_train_coords.x_pos += rate_of_change_x_pos * elapsed_time.asMilliseconds();
-		train.current_train_coords.y_pos += rate_of_change_y_pos * elapsed_time.asMilliseconds();
-
-	}
+	move_train_to_new_coords(train, elapsed_time);
 	train.circle.setPosition(train.current_train_coords.x_pos, train.current_train_coords.y_pos);
 	window.draw(train.circle);
 }
@@ -75,13 +78,21 @@ int Railway_model::get_pos_in_railway_model_vec(int station_number)
 	}
 }
 
-Railway_model::Railway_model(string railway_model_stations, string railway_model_connections)
+Railway_model::Railway_model(const string& railway_model_stations, const string& railway_model_connections)
 {
 	load_railway_model_stations(railway_model_stations);
 	load_railway_model_connections(railway_model_connections);
 }
 
-void Railway_model::load_railway_model_connections(string railway_model_connections)
+Railway_model::~Railway_model()
+{
+	for (int i = 0; i < railway_model_vec.size(); i++) {
+		delete railway_model_vec[i].station_info->station;
+		delete railway_model_vec[i].station_info;
+	}
+}
+
+void Railway_model::load_railway_model_connections(const string& railway_model_connections)
 {
 	string line;
 	stringstream line_stream;
@@ -109,7 +120,7 @@ void Railway_model::load_railway_model_connections(string railway_model_connecti
 	}
 }
 
-void Railway_model::load_railway_model_stations(string railway_model_stations)
+void Railway_model::load_railway_model_stations(const string& railway_model_stations)
 {
 	string line;
 	stringstream line_stream;
