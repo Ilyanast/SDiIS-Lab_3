@@ -3,17 +3,33 @@
 
 int main()
 {
-	Railway_model railway_model;
-	railway_model.load_railway_model_stations("railway_model_stations.txt");
-	railway_model.load_railway_model_connections("railway_model_connections.txt");
+	Railway_model* railway_model = nullptr;
+	Train* train_1 = nullptr;
+	Train* train_2 = nullptr;
+	Train* train_3 = nullptr;
 
-	Train* train_1 = new Train(1, &railway_model);
-	train_1->load_train("train_1.txt");
-	train_1->load_route("train_1_route.txt");
+	try
+	{
+		railway_model = new Railway_model("railway_model_stations.txt", "railway_model_connections.txt");
+		train_1 = new Train(1, railway_model);
+		train_2 = new Train(2, railway_model);
+		train_3 = new Train(3, railway_model);
 
-	Train* train_2 = new Train(2, &railway_model);
-	train_2->load_train("train_2.txt");
-	train_2->load_route("train_2_route.txt");
+		train_1->load_train("train_1.txt");
+		train_1->load_route("train_1_route.txt");
+		train_2->load_train("train_2.txt");
+		train_2->load_route("train_2_route.txt");
+		train_3->load_train("train_3.txt");
+		train_3->load_route("train_3_route.txt");
+	}
+	catch (OpenFileExeption openFileExeption) {
+		cerr << openFileExeption.get_message();
+		return 0;
+	}
+	catch (IncorrectInputDataExeption incorrectInputDataExeption) {
+		cerr << incorrectInputDataExeption.get_message();
+		return 0;
+	}
 
 	sf::RenderWindow window(sf::VideoMode(500, 500), "Railway model");
 
@@ -42,12 +58,15 @@ int main()
         }
 
 		elapsed_time = clock.restart();
-		railway_model.train_modeling(*train_1, elapsed_time);
-	//	railway_model.train_modeling(*train_2, elapsed_time);
+		railway_model->train_modeling(*train_1, elapsed_time);
+		railway_model->train_modeling(*train_2, elapsed_time);
+		railway_model->train_modeling(*train_3, elapsed_time);
 
 		window.draw(background);
 
-		railway_model.draw_train(*train_1, window, elapsed_time);
+		railway_model->draw_train(*train_1, window, elapsed_time);
+		railway_model->draw_train(*train_2, window, elapsed_time);
+		railway_model->draw_train(*train_3, window, elapsed_time);
 
         window.display();
 

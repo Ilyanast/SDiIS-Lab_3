@@ -181,8 +181,11 @@
   <ItemGroup>
     <ClInclude Include="Action_type.h" />
     <ClInclude Include="Coords.h" />
+    <ClInclude Include="Exeption.h" />
     <ClInclude Include="Freight_station.h" />
     <ClInclude Include="Freight_van.h" />
+    <ClInclude Include="IncorrectInputDataExeption.h" />
+    <ClInclude Include="OpenFileExeption.h" />
     <ClInclude Include="Railway_model.h" />
     <ClInclude Include="Locomative.h" />
     <ClInclude Include="Passanger_freight_station.h" />

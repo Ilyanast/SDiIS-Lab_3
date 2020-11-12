@@ -290,8 +290,10 @@ void Train::load_route(string filename)
 			line_stream.clear();
 		}
 	}
-	in.close();
-
+	else {
+		in.close();
+		throw OpenFileExeption();
+	}
 	current_station_num = train_route[0]->get_station_number();
 	current_train_coords.x_pos = railway_model->railway_model_vec[railway_model->get_pos_in_railway_model_vec(current_station_num)].station_info->station_coords.x_pos;
 	current_train_coords.y_pos = railway_model->railway_model_vec[railway_model->get_pos_in_railway_model_vec(current_station_num)].station_info->station_coords.y_pos;
@@ -342,13 +344,16 @@ void Train::load_train(string filename)
 			}
 
 			default:
-				break;
+				throw IncorrectInputDataExeption();
 			}
 
 			line_stream.clear();
 		}
 	}
-	in.close();
+	else {
+		in.close();
+		throw OpenFileExeption();
+	}
 }
 
 void Train::add_locomative(int locomative_number, int locomative_max_speed, int locomative_pulling_force)

@@ -55,6 +55,9 @@
     <Filter Include="Файлы ресурсов\Train\Train_route">
       <UniqueIdentifier>{95612b8f-d893-4fd0-ba56-4e7d8212fd18}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Exeption">
+      <UniqueIdentifier>{093d40bc-488b-4da1-992c-f2304abb7e3a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lab_3.cpp">
@@ -139,6 +142,15 @@
     </ClInclude>
     <ClInclude Include="Coords.h">
       <Filter>Файлы заголовков\Station</Filter>
+    </ClInclude>
+    <ClInclude Include="Exeption.h">
+      <Filter>Файлы заголовков\Exeption</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenFileExeption.h">
+      <Filter>Файлы заголовков\Exeption</Filter>
+    </ClInclude>
+    <ClInclude Include="IncorrectInputDataExeption.h">
+      <Filter>Файлы заголовков\Exeption</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

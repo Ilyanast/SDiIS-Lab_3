@@ -43,15 +43,14 @@ void Railway_model::draw_train(Train& train, RenderWindow& window, sf::Time elap
 
 	if (train.is_on_route && !train.is_on_station) {
 
-	/*	double rate_of_change_x_pos = (railway_model_vec[get_pos_in_railway_model_vec(train.get_next_station_num())].station_info->station_coords.x_pos -
-			train.current_train_coords.x_pos) / ((double)train.get_time_to_next_station() * 1000);*/
+		float rate_of_change_x_pos = (railway_model_vec[get_pos_in_railway_model_vec(train.get_next_station_num())].station_info->station_coords.x_pos -
+			railway_model_vec[get_pos_in_railway_model_vec(train.get_current_station_num())].station_info->station_coords.x_pos) / ((float)train.get_time_to_next_station() * 1000);
 
 		float rate_of_change_y_pos = (railway_model_vec[get_pos_in_railway_model_vec(train.get_next_station_num())].station_info->station_coords.y_pos -
 			railway_model_vec[get_pos_in_railway_model_vec(train.get_current_station_num())].station_info->station_coords.y_pos) / ((float)train.get_time_to_next_station() * 1000);
 
-		train.current_train_coords.x_pos += 0 * elapsed_time.asMilliseconds();
+		train.current_train_coords.x_pos += rate_of_change_x_pos * elapsed_time.asMilliseconds();
 		train.current_train_coords.y_pos += rate_of_change_y_pos * elapsed_time.asMilliseconds();
-		cout << rate_of_change_y_pos << endl;
 
 	}
 	train.circle.setPosition(train.current_train_coords.x_pos, train.current_train_coords.y_pos);
@@ -76,14 +75,20 @@ int Railway_model::get_pos_in_railway_model_vec(int station_number)
 	}
 }
 
-void Railway_model::load_railway_model_connections(string filename)
+Railway_model::Railway_model(string railway_model_stations, string railway_model_connections)
+{
+	load_railway_model_stations(railway_model_stations);
+	load_railway_model_connections(railway_model_connections);
+}
+
+void Railway_model::load_railway_model_connections(string railway_model_connections)
 {
 	string line;
 	stringstream line_stream;
 
 	int basic_station_num, connected_station_num, distance;
 
-	ifstream in(filename);
+	ifstream in(railway_model_connections);
 
 	if (in.is_open())
 	{
@@ -98,10 +103,13 @@ void Railway_model::load_railway_model_connections(string filename)
 			line_stream.clear();
 		}
 	}
-	in.close();
+	else {
+		in.close();
+		throw OpenFileExeption();
+	}
 }
 
-void Railway_model::load_railway_model_stations(string filename)
+void Railway_model::load_railway_model_stations(string railway_model_stations)
 {
 	string line;
 	stringstream line_stream;
@@ -120,7 +128,7 @@ void Railway_model::load_railway_model_stations(string filename)
 	Station_and_vector station_and_vector;
 	Coords station_coords;
 
-	ifstream in(filename);
+	ifstream in(railway_model_stations);
 
 	if (in.is_open())
 	{
@@ -154,7 +162,7 @@ void Railway_model::load_railway_model_stations(string filename)
 				break;
 			}
 			default:
-				continue;
+				throw IncorrectInputDataExeption();
 			}
 			station_and_vector.station_info = station_info;
 			railway_model_vec.push_back(station_and_vector);
@@ -162,13 +170,12 @@ void Railway_model::load_railway_model_stations(string filename)
 		}
 
 	}
-	in.close();
+	else {
+		in.close();
+		throw OpenFileExeption();
+	}
 }
 
-Railway_model::Railway_model()
-{
-
-}
 
 Station_info::Station_info(Station* station, int station_number, Coords station_coords)
 {

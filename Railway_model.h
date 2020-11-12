@@ -9,6 +9,8 @@
 #include <SFML/Graphics.hpp>
 #include "Train.h"
 #include "Coords.h"
+#include "IncorrectInputDataExeption.h"
+#include "OpenFileExeption.h"
 
 using namespace std;
 using namespace sf;
@@ -38,6 +40,8 @@ class Train;
 class Railway_model
 {
 	void add_connected_station(int basic_station_num, int connected_station_numm, int distance);
+	void load_railway_model_connections(string railway_model_connections);
+	void load_railway_model_stations(string railway_model_stations);
 	
 public:
 	vector<Station_and_vector> railway_model_vec;
@@ -47,7 +51,5 @@ public:
 
 	int get_pos_in_connected_stations_vec(int pos_in_railway_model_vec, int station_number);
 	int get_pos_in_railway_model_vec(int station_number);
-	void load_railway_model_connections(string filename);
-	void load_railway_model_stations(string filename);
-	Railway_model();
+	Railway_model(string railway_model_stations, string railway_model_connections);
 };
