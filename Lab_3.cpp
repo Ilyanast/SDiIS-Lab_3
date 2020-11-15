@@ -11,16 +11,10 @@ int main()
 	try
 	{
 		railway_model = new Railway_model("railway_model_stations.txt", "railway_model_connections.txt");
-		train_1 = new Train(1, railway_model);
-		train_2 = new Train(2, railway_model);
-		train_3 = new Train(3, railway_model);
+		train_1 = new Train(1, railway_model, "train_1.txt", "train_1_route.txt");
+		train_2 = new Train(2, railway_model, "train_2.txt", "train_2_route.txt");
+		train_3 = new Train(3, railway_model, "train_3.txt", "train_3_route.txt");
 
-		train_1->load_train("train_1.txt");
-		train_1->load_route("train_1_route.txt");
-		train_2->load_train("train_2.txt");
-		train_2->load_route("train_2_route.txt");
-		train_3->load_train("train_3.txt");
-		train_3->load_route("train_3_route.txt");
 	}
 	catch (OpenFileExeption openFileExeption) {
 		cerr << openFileExeption.get_message();
@@ -64,9 +58,9 @@ int main()
 
 		window.draw(background);
 
-		railway_model->draw_train(*train_1, window, elapsed_time);
-		railway_model->draw_train(*train_2, window, elapsed_time);
-		railway_model->draw_train(*train_3, window, elapsed_time);
+		railway_model->change_train_pos_and_draw(*train_1, window, elapsed_time);
+		railway_model->change_train_pos_and_draw(*train_2, window, elapsed_time);
+		railway_model->change_train_pos_and_draw(*train_3, window, elapsed_time);
 
         window.display();
 

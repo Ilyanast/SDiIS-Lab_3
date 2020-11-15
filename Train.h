@@ -64,8 +64,7 @@ public:
 	bool is_on_route = true;
 
 	Coords current_train_coords;
-
-	sf::CircleShape circle;
+	sf::CircleShape train_figure;
 
 	bool is_on_last_station();
 
@@ -82,9 +81,9 @@ public:
 	void move_to_next_station();
 	void do_action_on_station();
 
-	void load_route(const string& filename);
-	void load_train(const string& filename);
+	void load_route(const string& train_route_input_filename) throw();
+	void load_train(const string& train_input_filename) throw();
 
-	Train(int train_number, Railway_model* railway_model);
+	Train(int train_number, Railway_model* railway_model, const string& train_input_filename, const string& train_route_input_filename) throw();
 	~Train();
 };

@@ -41,18 +41,18 @@ class Railway_model
 {
 	void move_train_to_new_coords(Train& train, Time elapsed_time);
 	void add_connected_station(int basic_station_num, int connected_station_numm, int distance);
-	void load_railway_model_connections(const string& railway_model_connections);
-	void load_railway_model_stations(const string& railway_model_stations);
+	void load_railway_model_connections(const string& railway_model_connections) throw();
+	void load_railway_model_stations(const string& railway_model_stations) throw();
 	
 public:
 	vector<Station_and_vector> railway_model_vec;
 
 	void train_modeling(Train& train, Time elapsed_time);
-	void draw_train(Train& train, RenderWindow& window, Time elapsed_time);
+	void change_train_pos_and_draw(Train& train, RenderWindow& window, Time elapsed_time);
 
 	int get_pos_in_connected_stations_vec(int pos_in_railway_model_vec, int station_number);
 	int get_pos_in_railway_model_vec(int station_number);
 
-	Railway_model(const string& railway_model_stations, const string& railway_model_connections);
+	Railway_model(const string& railway_model_stations, const string& railway_model_connections) throw();
 	~Railway_model();
 };

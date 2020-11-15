@@ -12,7 +12,7 @@ int Freight_van::weight_of_van()
 	return van_empty_weight + current_cargo_weight;
 }
 
-void Freight_van::fill_and_decrease_weight_of_cargo_to_load(int& weight_of_cargo_to_load)
+void Freight_van::fill_van_and_decrease_weight_of_cargo_to_load(int& weight_of_cargo_to_load)
 {
 	int free_space = max_cargo_weight - current_cargo_weight;
 	

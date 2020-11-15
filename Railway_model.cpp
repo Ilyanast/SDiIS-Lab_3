@@ -53,11 +53,11 @@ void Railway_model::train_modeling(Train& train, sf::Time elapsed_time)
 	}
 }
 
-void Railway_model::draw_train(Train& train, RenderWindow& window, sf::Time elapsed_time)
+void Railway_model::change_train_pos_and_draw(Train& train, RenderWindow& window, sf::Time elapsed_time)
 {
 	move_train_to_new_coords(train, elapsed_time);
-	train.circle.setPosition(train.current_train_coords.x_pos, train.current_train_coords.y_pos);
-	window.draw(train.circle);
+	train.train_figure.setPosition(train.current_train_coords.x_pos, train.current_train_coords.y_pos);
+	window.draw(train.train_figure);
 }
 
 int Railway_model::get_pos_in_connected_stations_vec(int pos_in_railway_model_vec, int station_number)
@@ -78,7 +78,7 @@ int Railway_model::get_pos_in_railway_model_vec(int station_number)
 	}
 }
 
-Railway_model::Railway_model(const string& railway_model_stations, const string& railway_model_connections)
+Railway_model::Railway_model(const string& railway_model_stations, const string& railway_model_connections) throw()
 {
 	load_railway_model_stations(railway_model_stations);
 	load_railway_model_connections(railway_model_connections);
@@ -92,7 +92,7 @@ Railway_model::~Railway_model()
 	}
 }
 
-void Railway_model::load_railway_model_connections(const string& railway_model_connections)
+void Railway_model::load_railway_model_connections(const string& railway_model_connections) throw()
 {
 	string line;
 	stringstream line_stream;
@@ -120,7 +120,7 @@ void Railway_model::load_railway_model_connections(const string& railway_model_c
 	}
 }
 
-void Railway_model::load_railway_model_stations(const string& railway_model_stations)
+void Railway_model::load_railway_model_stations(const string& railway_model_stations) throw()
 {
 	string line;
 	stringstream line_stream;

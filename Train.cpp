@@ -129,7 +129,7 @@ int Train::load_freight_vans_and_get_remainder(int weight_of_cargo_to_load)
 	for (int i = 0; i < van_vector.size(); i++) {
 		if (van_vector[i]->get_train_element_type() == Train_element_type::FREIGHT) {
 			freight_van = (Freight_van*)van_vector[i];
-			freight_van->fill_and_decrease_weight_of_cargo_to_load(weight_of_cargo_to_load);
+			freight_van->fill_van_and_decrease_weight_of_cargo_to_load(weight_of_cargo_to_load);
 		}
 	}
 
@@ -269,7 +269,7 @@ void Train::do_action_on_station()
 
 }
 
-void Train::load_route(const string& filename)
+void Train::load_route(const string& train_route_input_filename) throw()
 {
 	string line;
 	stringstream line_stream;
@@ -277,7 +277,7 @@ void Train::load_route(const string& filename)
 	int station_number = 0;
 	int action_type = 0;
 
-	ifstream in(filename);
+	ifstream in(train_route_input_filename);
 
 	if (in.is_open())
 	{
@@ -299,7 +299,7 @@ void Train::load_route(const string& filename)
 	current_train_coords.y_pos = railway_model->railway_model_vec[railway_model->get_pos_in_railway_model_vec(current_station_num)].station_info->station_coords.y_pos;
 }
 
-void Train::load_train(const string& filename)
+void Train::load_train(const string& train_input_filename) throw()
 {
 	string line;
 	stringstream line_stream;
@@ -311,7 +311,7 @@ void Train::load_train(const string& filename)
 	int locomative_max_speed, locomative_pulling_force;
 	int	van_empty_weight, van_current_parameter, van_max_parameter;
 
-	ifstream in(filename);
+	ifstream in(train_input_filename);
 
 	if (in.is_open())
 	{
@@ -379,14 +379,17 @@ void Train::add_passenger_van(int van_number, int van_empty_weight, int current_
 }
 
 
-Train::Train(int train_number, Railway_model* railway_model)
+Train::Train(int train_number, Railway_model* railway_model, const string& train_input_filename, const string& train_route_input_filename) throw()
 {
 	this->railway_model = railway_model;
 	this->train_number = train_number;
 
-	circle.setRadius(10.f);
-	circle.setFillColor(Color::Blue);
-	circle.setOrigin(circle.getRadius(), circle.getRadius());
+	load_train(train_input_filename);
+	load_route(train_route_input_filename);
+
+	train_figure.setRadius(10.f);
+	train_figure.setFillColor(Color::Blue);
+	train_figure.setOrigin(train_figure.getRadius(), train_figure.getRadius());
 }
 
 Train::~Train()
